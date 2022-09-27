@@ -1,6 +1,5 @@
-<div [ngClass]="'text-white m-2 p-2 ' + getClasses()">
-<!-- <div ngClass="'text-white m-2 p-2 ' + getClasses()"></div> nieprawidłowe -->
-    Model zawiera {{model.getProducts().length}} produktów.
+<div [ngClass]="'text-white m-2 p-2 ' + getClasses()"
+    [textContent]="'Produkt: ' + (model.getProduct(3)?.name || 'Brak')">
 </div>
 <div class="form-group m-2">
     <label>Produkt</label>
