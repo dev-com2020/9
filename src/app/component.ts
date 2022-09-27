@@ -2,6 +2,7 @@ import { ApplicationRef, Component } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Product } from "./product.model";
 import { Model } from "./repository.model";
+import { ProductFormGroup, ProductFormControl } from "./form.model";
 
 @Component({
   selector: "app",
@@ -9,6 +10,7 @@ import { Model } from "./repository.model";
 })
 export class ProductComponent {
   model: Model = new Model();
+  formGroup: ProductFormGroup = new ProductFormGroup();
 
   constructor(ref: ApplicationRef) {
     (<any>window).appRef = ref;
@@ -61,44 +63,46 @@ export class ProductComponent {
 
   formSubmitted: boolean = false;
 
-  submitForm(form: NgForm) {
+  submitForm() {
+    Object.keys(this.formGroup.controls).forEach(c => this.newProduct[c] 
+      = this.formGroup.controls[c].value);
     this.formSubmitted = true;
-    if (form.valid){
+    if (this.formGroup.valid){
       this.addProduct(this.newProduct);
       this.newProduct = new Product();
-      form.reset();
+      this.formGroup.reset();
       this.formSubmitted = false;
     }
   }
 
 
-  getFormValidationMessages(form: NgForm): string[]{
-    let messages: string[] = [];
-    Object.keys(form.controls).forEach(k => {
-      this.getValidationMessages(form.controls[k],k).forEach(m=>messages.push(m));
-    });
-    return messages;
-  }
+  // getFormValidationMessages(form: NgForm): string[]{
+  //   let messages: string[] = [];
+  //   Object.keys(form.controls).forEach(k => {
+  //     this.getValidationMessages(form.controls[k],k).forEach(m=>messages.push(m));
+  //   });
+  //   return messages;
+  // }
 
-  getValidationMessages(state: any, thingName?: string) {
-    let thing: string = state.path || thingName;
-    let messages: string[] = [];
-    if (state.errors) {
-      for (let errorName in state.errors) {
-        switch (errorName) {
-          case "required":
-            messages.push(`Proszę podać ${thing}.`);
-            break;
-          case "minlength":
-            messages.push(`Wymagane jest podanie przynajmniej
-            ${state.errors['minlength'].requiredLength} znaków.`);
-            break;
-          case "pattern":
-            messages.push(`Wprowadzone dane zawierają niedozwolone znaki.`);
-            break;
-        }
-      }
-    }
-    return messages;
-  }
+  // getValidationMessages(state: any, thingName?: string) {
+  //   let thing: string = state.path || thingName;
+  //   let messages: string[] = [];
+  //   if (state.errors) {
+  //     for (let errorName in state.errors) {
+  //       switch (errorName) {
+  //         case "required":
+  //           messages.push(`Proszę podać ${thing}.`);
+  //           break;
+  //         case "minlength":
+  //           messages.push(`Wymagane jest podanie przynajmniej
+  //           ${state.errors['minlength'].requiredLength} znaków.`);
+  //           break;
+  //         case "pattern":
+  //           messages.push(`Wprowadzone dane zawierają niedozwolone znaki.`);
+  //           break;
+  //       }
+  //     }
+  //   }
+  //   return messages;
+  // }
 }

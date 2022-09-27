@@ -67,7 +67,7 @@
     [value]="selectedProduct || ''">
 </div> -->
     <div class="bg-info m-2 p-2">Model danych: {{jsonProduct}}</div>
-    <form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">
+    <form novalidate #form="ngForm" (ngSubmit)="submitForm()">
         <div class="bg-danger"
             *ngIf="formSubmitted && form.invalid">
             Wystąpiły problemy z formularzem!
@@ -112,7 +112,7 @@
         required
         pattern="^[0-9\.]+$">
         <ul>
-            <li *ngFor="let error of getFormValidationMessages(form)">
+            <li *ngFor="let error of formGroup.getFormValidationMessages()">
                 {{error}}
             </li>
         </ul>
