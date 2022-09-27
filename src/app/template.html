@@ -1,7 +1,34 @@
+<div class="text-white m-2">
+    <div class="p-2" [ngClass]="getClassMap(1)">
+        Pierwszy produkt to {{model.getProduct(1).name}}.
+</div>
+<div class="p-2 bg-warning">
+<span [ngStyle]="getStyles(2)">Drugi</span>produkt to {{model.getProduct(2).name}}.
+</div>
+
+<div class="p-2" [ngClass]="{'bg-success': model.getProduct(3).price < 50,
+                            'bg-info': model.getProduct(3).price >= 50}">
+Trzeci produkt to {{model.getProduct(3).name}}.
+</div>
+<div class="p-2 bg-warning">
+    Tutaj <span [style.fontSize]="fontSizeWithUnits">czwarty</span>
+    produkt to {{model.getProduct(4).name}}.
+</div>
+<div class="p-2 bg-warning">
+    Tutaj <span [style.fontSize.px]="fontSizeWithoutUnits">piąty</span>
+    produkt to {{model.getProduct(5).name}}.
+</div>
+
+</div>    
+
+
+
+
+
 <!-- <div [ngClass]="'text-white m-2 p-2 ' + getClasses()"
     [textContent]="'Produkt: ' + (model.getProduct(3)?.name || 'Brak')">
 </div> -->
-<div [ngClass]="'text-white m-2 p-2 ' + getClasses(1).name">
+<!-- <div [ngClass]="'text-white m-2 p-2 ' + getClasses(1).name">
 Produkt: {{model.getProduct(7)?.name || 'Brak'}}
 </div>
 <div class="form-group text-white m-2">
@@ -17,4 +44,4 @@ Produkt: {{model.getProduct(7)?.name || 'Brak'}}
     {{model.getProduct(1)?.name || 'Brak'}}
 
 </td>
-        </tr></table>
+        </tr></table> -->
