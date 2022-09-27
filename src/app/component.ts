@@ -42,4 +42,10 @@ export class ProductComponent {
   getProductPrice(index:number):number{
     return Math.floor(this.getProduct(index).price);
   }
+
+  selectedProduct: string;
+
+  getSelected(product: Product): boolean{
+    return product.name == this.selectedProduct;
+  }
 }
