@@ -1,6 +1,11 @@
 <style>
-    input.ng-dirty.ng-invalid {border: 2px solid red;}
-    input.ng-dirty.ng-valid {border: 2px solid green;}
+    input.ng-dirty.ng-invalid {
+        border: 2px solid red;
+    }
+
+    input.ng-dirty.ng-valid {
+        border: 2px solid green;
+    }
 </style>
 
 
@@ -19,27 +24,6 @@
         Wybrany produkt: {{selectedProduct || '(brak)'}}
     </div>
 
-
-    <!-- <div *ngIf="getProductCount() > 4" class="bg-info p-2 mt-1">
-    Model zawiera więcej niż 4 produkty.
-</div>
-
-<div *ngIf="getProductByPosition(0).name != 'Kajak'" class="bg-info p-2 mt-1">
-    Pierwszym produktem jest kajak.
-</div> -->
-
-    <!-- <div class="bg-info p-2 mt-1" [ngSwitch]="getProductCount()">
-    <span *ngSwitchCase="2">Mamy dwa produkty</span>
-    <span *ngSwitchCase="5">Mamy pięć produktów</span>
-    <span *ngSwitchDefault>To jest wartość domyślna</span>
-</div> -->
-
-    <!-- <div class="bg-info p-2 mt-1" [ngSwitch]="getProduct(1).name">
-    <span *ngSwitchCase="targetName">Kajak</span>
-    <span *ngSwitchCase="'Kamizelka ratunkowa'">Kamizelka</span>
-    <span *ngSwitchDefault>To jest wartość domyślna</span>
-</div> -->
-
     <table class="table table-sm table-bordered mt-1 text-white">
         <tr>
             <th>ID</th>
@@ -57,70 +41,52 @@
             <!-- <td *ngIf="!last">{{item.price}}</td> -->
         </tr>
     </table>
-    <!-- <div class="form-group">
-    <label>Nazwa produktu</label>
-    <input class="form-control" [(ngModel)]="selectedProduct" >
-</div>
-<div class="form-group">
-    <label>Nazwa produktu</label>
-    <input class="form-control" (input)="selectedProduct=$event.target.value"
-    [value]="selectedProduct || ''">
-</div> -->
-    <div class="bg-info m-2 p-2">Model danych: {{jsonProduct}}</div>
-    <form novalidate #form="ngForm" (ngSubmit)="submitForm()">
-        <div class="bg-danger"
-            *ngIf="formSubmitted && form.invalid">
+
+    <form class="m-2" novalidate [formGroup]="formGroup" (ngSubmit)="submitForm()">
+        <div class="bg-danger" *ngIf="formSubmitted && formGroup.invalid">
             Wystąpiły problemy z formularzem!
-        </div>
-    <div class="form-group">
-        <label>Nazwa produktu</label>
-        <input class="form-control" 
-        name="name" 
-        [(ngModel)]="newProduct.name"
-        #name="ngModel"
-        required 
-        minlength="5" 
-        pattern="^[A-Za-z ]+$" />
-        <!-- <ul class="text-danger list-unstyled" *ngIf="name.dirty">
-            <li *ngIf="name.errors?.required">
-                Proszę podać nazwę produktu.
-            </li>
-            <li *ngIf="name.errors?.pattern">
-                Nazwa produktu nie jest prawidłowa.
-            </li>
-            <li *ngIf="name.errors?.minlength">
-                Nazwa produktu musi składać się z min. 
-                {{name.errors.minlength.requiredLength}} znaków.
-            </li>
-        </ul> -->
-        <!-- <ul>
-            <li *ngFor="let error of getFormValidationMessages(form)">
-                {{error}}
-            </li>
-        </ul> -->
-    </div>
-    <!-- <div class="form-group">
-        <label>Kategoria</label>
-        <input class="form-control" [(ngModel)]="newProduct.category" >
-    </div>  -->
-    <div class="form-group">
-        <label>Cena</label>
-        <input class="form-control" 
-        name="price"
-        [(ngModel)]="newProduct.price" 
-        #price="ngModel"
-        required
-        pattern="^[0-9\.]+$">
-        <ul>
+            <ul>
             <li *ngFor="let error of formGroup.getFormValidationMessages()">
                 {{error}}
-            </li>
-        </ul>
+                </li>
+                </ul>
+                               
+        </div>
+        <div class="form-group">
+            <label>Nazwa produktu</label>
+            <input class="form-control" name="name" formControlName="name">
+            <ul class="text-danger list-unstyled"
+                *ngIf="(formSubmitted || formGroup.controls['name'].dirty) && formGroup.controls['name'].invalid">
+               
+                    <li *ngFor="let error of formGroup.getValidationMessages('name')">
+                        {{error}}
+                    </li>
+                </ul>
+                
+                <div class="form-group">
+                    <label>Kategoria</label>
+                    <input class="form-control" name="category" formControlName="category" />
+                    <ul class="text-danger list-unstyled" *ngIf="(formSubmitted || formGroup.controls['category'].dirty) &&
+            formGroup.controls['category'].invalid">
+                        <li *ngFor="let error of formGroup.getValidationMessages('category')">
+                            {{error}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label>Cena</label>
+                    <input class="form-control" name="price" formControlName="price" />
+                    <ul class="text-danger list-unstyled" *ngIf="(formSubmitted || formGroup.controls['price'].dirty) &&
+            formGroup.controls['price'].invalid">
+                        <li *ngFor="let error of formGroup.getValidationMessages('price')">
+                            {{error}}
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn btn-primary" type="submit" [disabled]="formSubmitted && formGroup.invalid"
+                    [class.btn-secondary]="formSubmitted && formGroup.invalid">Dodaj</button>
     </div>
-    <button class="btn btn-primary" type="submit" 
-    [disabled]="formSubmitted && form.invalid"
-    [class.btn-secondary]="formSubmitted && form.invalid">Dodaj</button>
-</form>
+    </form>
 
     <ng-template [ngTemplateOutlet]="titleTemplate" [ngTemplateOutletContext]="{title: 'Stopka'}"></ng-template>
 
