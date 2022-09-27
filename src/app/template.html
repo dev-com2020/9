@@ -77,7 +77,7 @@
         required 
         minlength="5" 
         pattern="^[A-Za-z ]+$" />
-        <ul class="text-danger list-unstyled" *ngIf="name.dirty">
+        <!-- <ul class="text-danger list-unstyled" *ngIf="name.dirty">
             <li *ngIf="name.errors?.required">
                 Proszę podać nazwę produktu.
             </li>
@@ -87,6 +87,11 @@
             <li *ngIf="name.errors?.minlength">
                 Nazwa produktu musi składać się z min. 
                 {{name.errors.minlength.requiredLength}} znaków.
+            </li>
+        </ul> -->
+        <ul class="text-danger list-unstyled" *ngIf="name.dirty && name.invalid">
+            <li *ngFor="let error of getValidationMessages(name)">
+                {{error}}
             </li>
         </ul>
     </div>
