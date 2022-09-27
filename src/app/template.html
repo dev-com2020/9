@@ -44,4 +44,12 @@
 </table>
 <ng-template [ngTemplateOutlet]="titleTemplate"
 [ngTemplateOutletContext]="{title: 'Stopka'}"></ng-template>
+
+<!-- <div class="bg-info p-2">
+    Następny produkt to {{nextProduct.name}}
+</div> -->
+<div class="bg-info p-2">
+    Cena po zaokrągleniu wynosi {{getProductPrice(2)}}zł.
+    </div> 
+
     </div>
