@@ -70,8 +70,25 @@
     <form novalidate (ngSubmit)="addProduct(newProduct)">
     <div class="form-group">
         <label>Nazwa produktu</label>
-        <input class="form-control" name="name" [(ngModel)]="newProduct.name"
-        required minlength="5" pattern="^[A-Za-z ]+$" />
+        <input class="form-control" 
+        name="name" 
+        [(ngModel)]="newProduct.name"
+        #name="ngModel"
+        required 
+        minlength="5" 
+        pattern="^[A-Za-z ]+$" />
+        <ul class="text-danger list-unstyled" *ngIf="name.dirty">
+            <li *ngIf="name.errors?.required">
+                Proszę podać nazwę produktu.
+            </li>
+            <li *ngIf="name.errors?.pattern">
+                Nazwa produktu nie jest prawidłowa.
+            </li>
+            <li *ngIf="name.errors?.minlength">
+                Nazwa produktu musi składać się z min. 
+                {{name.errors.minlength.requiredLength}} znaków.
+            </li>
+        </ul>
     </div>
     <!-- <div class="form-group">
         <label>Kategoria</label>
