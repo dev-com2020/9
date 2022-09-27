@@ -10,7 +10,8 @@
 </div>
 
 <div class="bg-info p-2">
-    Wybrany produkt: {{product.value || '(brak)'}}
+    <!-- Wybrany produkt: {{product.value || '(brak)'}} -->
+    Wybrany produkt: {{selectedProduct || '(brak)'}}
 </div>
 
 
@@ -50,7 +51,12 @@
 </table>
 <div class="form-group">
     <label>Nazwa produktu</label>
-    <input #product class="form-control" (input)="selectedProduct=$event.target.value">
+    <input class="form-control" [(ngModel)]="selectedProduct" >
+</div>
+<div class="form-group">
+    <label>Nazwa produktu</label>
+    <input class="form-control" (input)="selectedProduct=$event.target.value"
+    [value]="selectedProduct || ''">
 </div>
 
 <ng-template [ngTemplateOutlet]="titleTemplate"
