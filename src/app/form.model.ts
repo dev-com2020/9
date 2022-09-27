@@ -1,4 +1,5 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { LimitValidator } from "./limit.formvalidator";
 
 export class ProductFormControl extends FormControl {
     label: string;
@@ -24,6 +25,9 @@ export class ProductFormControl extends FormControl {
                     case "pattern":
                         messages.push(`Wprowadzone dane zawierają niedozwolone znaki.`);
                         break;
+                    case "limit":
+                        messages.push(`Wartość max wynosi ${this.errors['limit'].limit}.`);
+                        break;
                 }
             }
         }
@@ -44,6 +48,7 @@ export class ProductFormGroup extends FormGroup {
 
             price: new ProductFormControl("Cena", "price", "",
                 Validators.compose([Validators.required,
+                LimitValidator.Limit(999),
                 Validators.pattern("^[0-9\.]+$")]))
         });
     }
