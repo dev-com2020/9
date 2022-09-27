@@ -1,4 +1,5 @@
 import { ApplicationRef, Component } from "@angular/core";
+import { NgForm } from "@angular/forms";
 import { Product } from "./product.model";
 import { Model } from "./repository.model";
 
@@ -56,6 +57,27 @@ export class ProductComponent {
   }
   addProduct(p: Product) {
     console.log("Nowy produkt: " + this.jsonProduct);
+  }
+
+  formSubmitted: boolean = false;
+
+  submitForm(form: NgForm) {
+    this.formSubmitted = true;
+    if (form.valid){
+      this.addProduct(this.newProduct);
+      this.newProduct = new Product();
+      form.reset();
+      this.formSubmitted = false;
+    }
+  }
+
+
+  getFormValidationMessages(form: NgForm): string[]{
+    let messages: string[] = [];
+    Object.keys(form.controls).forEach(k => {
+      this.getValidationMessages(form.controls[k],k).forEach(m=>messages.push(m));
+    });
+    return messages;
   }
 
   getValidationMessages(state: any, thingName?: string) {
