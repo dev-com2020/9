@@ -27,7 +27,7 @@ export class ProductComponent {
     return this.getProducts().length;
   }
 
-  getKey(index: number, product: Product){
+  getKey(index: number, product: Product) {
     return product.id;
   }
 
@@ -39,13 +39,22 @@ export class ProductComponent {
   //   return this.model.getProducts().shift();
   // }
 
-  getProductPrice(index:number):number{
+  getProductPrice(index: number): number {
     return Math.floor(this.getProduct(index).price);
   }
 
   selectedProduct: string;
 
-  getSelected(product: Product): boolean{
+  getSelected(product: Product): boolean {
     return product.name == this.selectedProduct;
+  }
+
+  newProduct: Product = new Product();
+
+  get jsonProduct() {
+    return JSON.stringify(this.newProduct);
+  }
+  addProduct(p: Product) {
+    console.log("Nowy produkt: " + this.jsonProduct);
   }
 }
