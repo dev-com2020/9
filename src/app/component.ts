@@ -58,7 +58,7 @@ export class ProductComponent {
     return JSON.stringify(this.newProduct);
   }
   addProduct(p: Product) {
-    console.log("Nowy produkt: " + this.jsonProduct);
+    this.model.saveProduct(p);
   }
 
   formSubmitted: boolean = false;
@@ -74,35 +74,4 @@ export class ProductComponent {
       this.formSubmitted = false;
     }
   }
-
-
-  // getFormValidationMessages(form: NgForm): string[]{
-  //   let messages: string[] = [];
-  //   Object.keys(form.controls).forEach(k => {
-  //     this.getValidationMessages(form.controls[k],k).forEach(m=>messages.push(m));
-  //   });
-  //   return messages;
-  // }
-
-  // getValidationMessages(state: any, thingName?: string) {
-  //   let thing: string = state.path || thingName;
-  //   let messages: string[] = [];
-  //   if (state.errors) {
-  //     for (let errorName in state.errors) {
-  //       switch (errorName) {
-  //         case "required":
-  //           messages.push(`Proszę podać ${thing}.`);
-  //           break;
-  //         case "minlength":
-  //           messages.push(`Wymagane jest podanie przynajmniej
-  //           ${state.errors['minlength'].requiredLength} znaków.`);
-  //           break;
-  //         case "pattern":
-  //           messages.push(`Wprowadzone dane zawierają niedozwolone znaki.`);
-  //           break;
-  //       }
-  //     }
-  //   }
-  //   return messages;
-  // }
 }

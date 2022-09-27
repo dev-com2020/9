@@ -4,9 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //import { AppComponent } from './app.component';
 import { ProductComponent } from "./component";
+import { PaAttrDirective } from './attr.directive';
 
 @NgModule({
-  declarations: [ProductComponent],
+  declarations: [ProductComponent, PaAttrDirective],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule], providers: [],
   bootstrap: [ProductComponent]
 })
