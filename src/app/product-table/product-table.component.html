@@ -1,4 +1,19 @@
-Model zawiera {{getProducts().length}} produktów.
+<div>
+    <label>Stawka podatku:</label>
+    <select [value]="taxRate || 0" (change)="taxRate=$event.target.value">
+        <option value="0">Brak</option>
+        <option value="8">8%</option>
+        <option value="23">23%</option>
+    </select>
+</div>
+<div>
+    <label>Filtr:</label>
+    <select [(ngModel)]="categoryFilter">
+        <option>Szachy</option>
+        <option>Piłka nożna</option>
+        <option>Sporty wodne</option>
+    </select>
+</div>
 <table class="table table-sm table-bordered table-striped">
     <tr>
         <th>Id</th>
@@ -7,15 +22,16 @@ Model zawiera {{getProducts().length}} produktów.
         <th>Cena</th>
         <th></th>
     </tr>
-    <tr *ngFor="let item of getProducts(); let i = index; let odd = odd;
+    <tr *ngFor="let item of getProducts() | filter:categoryFilter; let i = index; let odd = odd;
 let even = even" [class.bg-info]="odd" [class.bg-warning]="even">
         <td style="vertical-align:middle">{{i + 1}}</td>
         <td style="vertical-align:middle">{{item.name}}</td>
         <td style="vertical-align:middle">{{item.category}}</td>
         <td style="vertical-align:middle">
-            {{item.price | currency:"PLN":"symbol":undefined:"pl-PL" }}</td>
+            {{item.price | addTax:(taxRate || 0) | currency:"PLN":"symbol":undefined:"pl-PL" }}</td>
         <td class="text-center">
-            <button class="btn btn-danger btn-sm" (click)="deleteProduct(item.id)">
+            <button class="btn btn-danger btn-sm" 
+            (click)="deleteProduct(item.id)">
                 Usuń
             </button>
         </td>
