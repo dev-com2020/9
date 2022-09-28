@@ -26,6 +26,12 @@
     <div class="bg-info p-2">
         Mamy {{getProductCount()}} produktów w bazie.
     </div>
+    <div class="form-group bg-info p-2">
+        <label>Produkt:</label>
+        <input class="bg-primary text-white" [paModel]="newProduct.name"
+        (paModelChange)="newProduct.name=$event"/>
+    </div>
+
 
     <table class="table table-sm table-bordered mt-1 text-white">
         <tr>
@@ -35,10 +41,11 @@
             <th>Cena</th>
         </tr>
         <tr *ngFor="let item of getProducts(); let i = index" 
-        [pa-attr]="getProducts().length < 6 ? 'bg-success' : 'bg-warning'"> 
+        [pa-attr]="getProducts().length < 6 ? 'bg-success' : 'bg-warning'"
+        [pa-product]="item" (pa-category)="newProduct.category=$event"> 
             <td>{{i + 1}}</td>
             <td>{{item.name}}</td>
-            <td [pa-attr]="item.category == 'Kajak' ? 'bg-info': null">{{item.category}}</td>
+            <td [pa-attr]="item.category == 'Piłka nożna' ? 'bg-info': null">{{item.category}}</td>
             <td [pa-attr]="'bg-info'">{{item.price}}</td>
 
         </tr>
