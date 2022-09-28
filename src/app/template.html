@@ -34,12 +34,12 @@
             <th>Kategoria</th>
             <th>Cena</th>
         </tr>
-        <tr *ngFor="let item of getProducts(); let i = index; pa-attr" class="text-white"
-            [class.bg-warning]="getSelected(item)">
-            <td (mouseover)="selectedProduct=item.name">{{i + 1}}</td>
+        <tr *ngFor="let item of getProducts(); let i = index" 
+        [pa-attr]="getProducts().length < 6 ? 'bg-success' : 'bg-warning'"> 
+            <td>{{i + 1}}</td>
             <td>{{item.name}}</td>
-            <td>{{item.category}}</td>
-            <td>{{item.price}}</td>
+            <td [pa-attr]="item.category == 'Kajak' ? 'bg-info': null">{{item.category}}</td>
+            <td [pa-attr]="'bg-info'">{{item.price}}</td>
 
         </tr>
     </table>
