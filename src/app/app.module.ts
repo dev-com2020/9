@@ -9,9 +9,10 @@ import { PaModel } from './twoway.directive';
 import { ProductTableComponent } from './product-table/product-table.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ToggleViewComponent } from './toggle-view/toggle-view.component';
+import {  PaCellColor  } from './cellColor.directive';
 
 @NgModule({
-  declarations: [ProductComponent, PaAttrDirective, PaModel, ProductTableComponent, ProductFormComponent, ToggleViewComponent],
+  declarations: [ProductComponent, PaAttrDirective, PaModel, ProductTableComponent, ProductFormComponent, ToggleViewComponent,  PaCellColor ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule], 
   providers: [],
   bootstrap: [ProductComponent]

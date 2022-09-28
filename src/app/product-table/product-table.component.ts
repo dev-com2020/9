@@ -21,6 +21,10 @@ export class ProductTableComponent {
   }
 
   showTable: boolean = true;
+
+  taxRate: number = 0;
+  categoryFilter: string;
+  itemCount: 3;
 }
 
 
