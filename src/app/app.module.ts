@@ -15,15 +15,18 @@ import { PaCategoryFilterPipe } from "./categoryFilter.pipe";
 import { LOCALE_ID } from "@angular/core";
 import localePL from '@angular/common/locales/pl'
 import { PaAddTaxPipe } from "./addTax.pipe";
+import { DiscountDisplayComponent } from './discount-display/discount-display.component';
+import { DiscountEditorComponent } from './discount-editor/discount-editor.component';
+import { DiscountService } from './discount.service';
 
 registerLocaleData(localePL);
 
 @NgModule({
   declarations: [ProductComponent, PaAttrDirective, 
     PaModel, ProductTableComponent, ProductFormComponent, 
-    ToggleViewComponent,  PaCellColor,PaAddTaxPipe,PaCategoryFilterPipe ],
+    ToggleViewComponent,  PaCellColor,PaAddTaxPipe,PaCategoryFilterPipe, DiscountDisplayComponent, DiscountEditorComponent ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule], 
-  providers: [{provide: LOCALE_ID, useValue:"pl-PL"}],
+  providers: [DiscountService,{provide: LOCALE_ID, useValue:"pl-PL"}],
   bootstrap: [ProductComponent]
 })
 export class AppModule { }

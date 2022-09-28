@@ -50,7 +50,7 @@ let even = even" [class.bg-info]="odd" [class.bg-warning]="even">
         <td style="vertical-align:middle">{{item.category}}</td>
         <td style="vertical-align:middle">
             {{item.price | addTax:(taxRate || 0) | currency:"PLN":"symbol":undefined:"pl-PL"}}</td>
-        <td style="vertical-align:middle">{{item.category | i18nSelect:selectMap }}</td>
+        <!-- <td style="vertical-align:middle">{{item.category | i18nSelect:selectMap }}</td> -->
         <td class="text-center">
             <button class="btn btn-danger btn-sm" (click)="deleteProduct(item.id)">
                 Usuń
@@ -58,3 +58,6 @@ let even = even" [class.bg-info]="odd" [class.bg-warning]="even">
         </td>
     </tr>
 </table>
+
+<paDiscountEditor></paDiscountEditor>
+<paDiscountDisplay></paDiscountDisplay>

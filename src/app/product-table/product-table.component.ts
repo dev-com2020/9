@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DiscountService } from '../discount.service';
 import { Product } from '../product.model';
 import { Model } from '../repository.model';
 
@@ -7,8 +8,11 @@ import { Model } from '../repository.model';
   templateUrl: "product-table.component.html"
 })
 export class ProductTableComponent {
+  // discounter: DiscountService = new DiscountService();
+  
   @Input("model")
   dataModel: Model;
+
 
   getProduct(key: number): Product {
     return this.dataModel.getProduct(key);
@@ -32,6 +36,8 @@ export class ProductTableComponent {
     "other": "będzie dobra zabawa..."
 
   }
+
+
 }
 
 
