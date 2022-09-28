@@ -25,6 +25,13 @@ export class ProductTableComponent {
   taxRate: number = 0;
   categoryFilter: string;
   itemCount: 3;
+
+  selectMap = {
+    "Sporty wodne": "będzie mokro...",
+    "Piłka nożna": "będą bramki...",
+    "other": "będzie dobra zabawa..."
+
+  }
 }
 
 

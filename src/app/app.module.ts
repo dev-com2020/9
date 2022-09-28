@@ -12,6 +12,7 @@ import { ToggleViewComponent } from './toggle-view/toggle-view.component';
 import {  PaCellColor  } from './cellColor.directive';
 import { registerLocaleData } from '@angular/common'
 import { PaCategoryFilterPipe } from "./categoryFilter.pipe";
+import { LOCALE_ID } from "@angular/core";
 import localePL from '@angular/common/locales/pl'
 import { PaAddTaxPipe } from "./addTax.pipe";
 
@@ -22,7 +23,7 @@ registerLocaleData(localePL);
     PaModel, ProductTableComponent, ProductFormComponent, 
     ToggleViewComponent,  PaCellColor,PaAddTaxPipe,PaCategoryFilterPipe ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule], 
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue:"pl-PL"}],
   bootstrap: [ProductComponent]
 })
 export class AppModule { }
