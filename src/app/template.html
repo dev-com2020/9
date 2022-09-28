@@ -6,17 +6,25 @@
     input.ng-dirty.ng-valid {
         border: 2px solid green;
     }
+
+    table {
+        background-color:darkblue;
+    }
+    input {
+        width: auto;
+    }
 </style>
 
 
 <ng-template #titleTemplate let-text="title">
     <h4 class="p-2 bg-success text-white">{{text}}</h4>
 </ng-template>
-<ng-template [ngTemplateOutlet]="titleTemplate" [ngTemplateOutletContext]="{title: 'Nagłówek'}"></ng-template>
+<ng-template [ngTemplateOutlet]="titleTemplate" 
+[ngTemplateOutletContext]="{title: 'Kurs Angular'}"></ng-template>
 
 <div class="text-white m-2">
     <div class="bg-info p-2">
-        Mamy {{getProductCount()}} produktów.
+        Mamy {{getProductCount()}} produktów w bazie.
     </div>
 
     <table class="table table-sm table-bordered mt-1 text-white">
