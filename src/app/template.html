@@ -1,81 +1,13 @@
-<style>
-    input.ng-dirty.ng-invalid {
-        border: 2px solid red;
-    }
-
-    input.ng-dirty.ng-valid {
-        border: 2px solid green;
-    }
-
-    table {
-        background-color:darkblue;
-    }
-    input {
-        width: auto;
-    }
-</style>
-
-
-<ng-template #titleTemplate let-text="title">
-    <h4 class="p-2 bg-success text-white">{{text}}</h4>
-</ng-template>
-<ng-template [ngTemplateOutlet]="titleTemplate" 
-[ngTemplateOutletContext]="{title: 'Kurs Angular'}"></ng-template>
-
-<div class="text-white m-2">
-    <div class="bg-info p-2">
-        Mamy {{getProductCount()}} produktów w bazie.
+<div class="row text-white m-2">
+    <div class="col-4 p-2 bg-success">
+        <paProductForm (paNewProduct)="addProduct($event)"></paProductForm>
     </div>
-    <div class="form-group bg-info p-2">
-        <label>Produkt:</label>
-        <input class="bg-primary text-white" [(paModel)]="newProduct.name"/>
+    <div class="col-8 p-2 bg-primary">
+        <paProductTable [model]="model"></paProductTable>
     </div>
-
-
-    <table class="table table-sm table-bordered mt-1 text-white">
-        <tr>
-            <th>ID</th>
-            <th>Produkt</th>
-            <th>Kategoria</th>
-            <th>Cena</th>
-        </tr>
-        <tr *ngFor="let item of getProducts(); let i = index" 
-        [pa-attr]="getProducts().length < 6 ? 'bg-success' : 'bg-warning'"
-        [pa-product]="item" (pa-category)="newProduct.category=$event"> 
-            <td>{{i + 1}}</td>
-            <td>{{item.name}}</td>
-            <td [pa-attr]="item.category == 'Piłka nożna' ? 'bg-info': null">{{item.category}}</td>
-            <td [pa-attr]="'bg-info'">{{item.price}}</td>
-
-        </tr>
-    </table>
-
-    <form class="m-2" novalidate [formGroup]="formGroup" (ngSubmit)="submitForm()">
-        <div class="bg-danger" *ngIf="formSubmitted && formGroup.invalid">
-            Wystąpiły problemy z formularzem!
-            <ul>
-            <li *ngFor="let error of formGroup.getFormValidationMessages()">
-                {{error}}
-                </li>
-                </ul>
-                               
-        </div>
-
-        <div class="form-group" *ngFor="let control of formGroup.productControls">
-            <label>{{control.label}}</label>
-            <input class="form-control" name="{{control.modelProperty}}" formControlName="{{control.modelProperty}}">
-            <ul class="text-danger list-unstyled"
-                *ngIf="(formSubmitted || control.dirty) && control.invalid">
-               
-                    <li *ngFor="let error of control.getValidationMessages()">
-                        {{error}}
-                    </li>
-                </ul>
-        </div>
-                
-                <button class="btn btn-primary" type="submit" [disabled]="formSubmitted && formGroup.invalid"
-                    [class.btn-secondary]="formSubmitted && formGroup.invalid">Dodaj</button>
-    
-    </form>
-
- </div>
+    <div class="col-8 p-2">
+        <paToggleView>
+            <paProductTable [model]="model"></paProductTable>
+        </paToggleView>
+    </div>
+</div>
