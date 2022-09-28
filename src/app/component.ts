@@ -1,8 +1,7 @@
 import { ApplicationRef, Component } from "@angular/core";
-import { NgForm } from "@angular/forms";
-import { Product } from "./product.model";
-import { Model } from "./repository.model";
-import { ProductFormGroup, ProductFormControl } from "./form.model";
+// import { Product } from "./product.model";
+// import { Model } from "./repository.model";
+// import { ProductFormGroup, ProductFormControl } from "./form.model";
 
 
 @Component({
@@ -11,65 +10,67 @@ import { ProductFormGroup, ProductFormControl } from "./form.model";
   // styles: ["/deep/div { border: 2px black solid; font-style: italic }"]
 })
 export class ProductComponent {
-  model: Model = new Model();
-  formGroup: ProductFormGroup = new ProductFormGroup();
+  // model: Model = new Model();
+  // constructor(public model: Model){}
 
-  constructor(ref: ApplicationRef) {
-    (<any>window).appRef = ref;
-    (<any>window).model = this.model;
-  }
-  getProductByPosition(position: number): Product {
-    return this.model.getProducts()[position];
-  }
-  getProduct(key: number): Product {
-    return this.model.getProduct(key);
-  }
-  getProducts(): Product[] {
-    return this.model.getProducts();
-  }
-  getProductCount(): number {
-    console.log("Wywołanie metody getProductCount().")
-    return this.getProducts().length;
-  }
+  // formGroup: ProductFormGroup = new ProductFormGroup();
 
-  getKey(index: number, product: Product) {
-    return product.id;
-  }
+  // constructor(ref: ApplicationRef) {
+  //   (<any>window).appRef = ref;
+  //   (<any>window).model = this.model;
+  // }
+  // getProductByPosition(position: number): Product {
+  //   return this.model.getProducts()[position];
+  // }
+  // getProduct(key: number): Product {
+  //   return this.model.getProduct(key);
+  // }
+  // getProducts(): Product[] {
+  //   return this.model.getProducts();
+  // }
+  // getProductCount(): number {
+  //   console.log("Wywołanie metody getProductCount().")
+  //   return this.getProducts().length;
+  // }
 
-  targetName: string = "Kajak";
+  // getKey(index: number, product: Product) {
+  //   return product.id;
+  // }
 
-  counter: number = 1;
+  // targetName: string = "Kajak";
 
-  getProductPrice(index: number): number {
-    return Math.floor(this.getProduct(index).price);
-  }
+  // counter: number = 1;
 
-  selectedProduct: string;
+  // getProductPrice(index: number): number {
+  //   return Math.floor(this.getProduct(index).price);
+  // }
 
-  getSelected(product: Product): boolean {
-    return product.name == this.selectedProduct;
-  }
+  // selectedProduct: string;
 
-  newProduct: Product = new Product();
+  // getSelected(product: Product): boolean {
+  //   return product.name == this.selectedProduct;
+  // }
 
-  get jsonProduct() {
-    return JSON.stringify(this.newProduct);
-  }
-  addProduct(p: Product) {
-    this.model.saveProduct(p);
-  }
+  // newProduct: Product = new Product();
+
+  // get jsonProduct() {
+  //   return JSON.stringify(this.newProduct);
+  // }
+  // addProduct(p: Product) {
+  //   this.model.saveProduct(p);
+  // }
 
   formSubmitted: boolean = false;
 
-  submitForm() {
-    Object.keys(this.formGroup.controls).forEach(c => this.newProduct[c] 
-      = this.formGroup.controls[c].value);
-    this.formSubmitted = true;
-    if (this.formGroup.valid){
-      this.addProduct(this.newProduct);
-      this.newProduct = new Product();
-      this.formGroup.reset();
-      this.formSubmitted = false;
-    }
-  }
+  // submitForm() {
+  //   Object.keys(this.formGroup.controls).forEach(c => this.newProduct[c] 
+  //     = this.formGroup.controls[c].value);
+  //   this.formSubmitted = true;
+  //   if (this.formGroup.valid){
+  //     this.addProduct(this.newProduct);
+  //     this.newProduct = new Product();
+  //     this.formGroup.reset();
+  //     this.formSubmitted = false;
+  //   }
+  // }
 }
